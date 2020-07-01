@@ -1,0 +1,15 @@
+- Ability to specify attack mode
+- Ability to specify hash type
+- Ability to specify the hashes
+- Ability to get realtime output updates/status
+- Ability to save hashes cracked in a database
+- Ability to view hashes cracked from the database
+- Ability to specify charset in case of bruteforce
+- Ability to specify password length in case of bruteforce
+- Ability to specify if i wanna use incremental brute force or not
+- Ability to specify custom charset placements
+
+- A thread should be running to get updates from hashcat output and put it in a database
+- The database should be able to tell the hashes stored, cracked hashes, status of the program (running, failed, completed, percentage)
+- May be also live updating using a websocket.
+- If the websocket is connected, update GUI whenever there are new results or progress.

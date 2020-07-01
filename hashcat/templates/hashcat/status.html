@@ -1,0 +1,79 @@
+{% extends 'hashcat/base.html' %}
+
+{% block title %}Status{% endblock %}
+{% block subtitle %}{{crackingTask.name}}{% endblock %}
+<!-- Preload this with existing things in the database-->
+{% block content %}
+	<div class="columns progress-column">
+		<div class="column is-1 has-text-centered has-text-weight-bold" id="crackingStatus-{{crackingTask.id}}" style="width: 10%">
+			{{crackingTask.statusText}}
+		</div>
+		<div class="column is-10" style="padding: 16px; width: 82%">
+			<progress class="progress is-info" value="{{crackingTask.progressPercent}}" max="100" id="crackingProgress-{{crackingTask.id}}"></progress>
+		</div>
+		<div class="column is-1 has-text-centered has-text-weight-bold" id="crackingPercentage-{{crackingTask.id}}" style="width: 8%">
+			{{crackingTask.progressPercent}}%
+		</div>
+	</div>
+	<div class="columns">
+		<div class="column is-8 info-column progress-column no-left-margin">
+			<b>Table of hashes</b>
+			<table style="width:100%; margin-top:8px;" class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth has-text-weight-light is-size-7">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Hashes</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for hash in crackingTask.hash_set.all %}
+						<tr>
+							<td>{{ hash.username }}</td>
+							<td id="{{ hash.id }}">{{ hash.password }}</td>
+							<td>{{ hash.hashText }}</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="column info-column progress-column no-right-margin no-left-margin">
+			<b>Status information</b><br>
+			<table style="width:100%" class="has-text-weight-light is-size-7">
+				<tr>
+					<td class="has-text-weight-bold">Creation date</td><td>{{crackingTask.startDate}}</td>
+				</tr>
+				<tr>
+					<td class="has-text-weight-bold">Hash type</td><td>{{crackingTask.hashTypeText}}</td>
+				</tr>
+				<tr>
+					<td class="has-text-weight-bold">Attack mode</td><td>{{crackingTask.attackModeText}}</td>
+				</tr>
+				<tr>
+					<td class="has-text-weight-bold">Hashes recovered</td><td id="recoveredHashes-{{crackingTask.id}}">{{crackingTask.recoveredHashes}}</td>
+				</tr>
+				<tr>
+					<td class="has-text-weight-bold">Loaded hashes</td><td>{{crackingTask.totalLoadedHashes}}</td>
+				</tr>
+				<tr>
+					<td class="has-text-weight-bold">Tried passwords</td><td id="triedPasswords-{{crackingTask.id}}">{{crackingTask.triedPasswords}}</td>
+				</tr>
+				<tr>
+					<td class="has-text-weight-bold">Total passwords</td><td>{{crackingTask.totalPasswords}}</td>
+				</tr>
+				<tr>
+					<td class="has-text-weight-bold">Speed</td><td id="speed-{{crackingTask.id}}">{{crackingTask.speed}} H/s</td>
+				</tr>
+				<tr>
+					<td class="has-text-weight-bold">Remaining time</td><td id="estimatedTime-{{crackingTask.id}}">{{crackingTask.estimatedTime}}s</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	{% if crackingTask.status == 0 or crackingTask.status == 3 %}
+	<script type="text/javascript">
+		status({{crackingTask.id}});
+	</script>
+	{% endif %}
+{% endblock %}

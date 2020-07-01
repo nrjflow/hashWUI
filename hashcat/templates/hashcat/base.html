@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	{% csrf_token %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bulma.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+	<script type="text/javascript">
+		var csrftoken = document.getElementsByName('csrfmiddlewaretoken')[0].value;
+	</script>
+	<script src="{% static 'js/functions.js' %}"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+	<nav class="navbar is-primary">
+		<div class="container">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="{% url 'home' %}" style="font-weight:bold;">
+				Hashcat WUI
+				</a>
+
+			</div>
+			<div id="navMenu" class="navbar-menu">
+				<div class="navbar-end">
+					{% block nav-home %}<a href="{% url 'home' %}" class="navbar-item">Cracking tasks</a>{% endblock %}
+					{% block nav-new %}<a href="{% url 'new' %}" class="navbar-item">New task</a>{% endblock %}
+					{% block nav-archive %}<a href="#" class="navbar-item">Archive</a>{% endblock %}
+					{% block nav-settings %}<a href="#" class="navbar-item">Settings</a>{% endblock %}
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	<div class="columns no-margin">
+		<div class="column is-8 is-offset-2 no-left-padding">
+			<div class="section quarter-padding no-left-padding">
+				<div class="container no-left-margin">
+				      <h1 class="title">
+				        {% block subtitle %}
+						{% endblock %}
+				      </h1>
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="columns" style="margin-bottom:8px;">
+		<div class="column is-8 is-offset-2 main-frame">
+			<div class="section">
+				<div class="container">
+					{% block content %}
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+				
+</body>
+</html>
+

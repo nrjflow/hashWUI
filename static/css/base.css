@@ -1,0 +1,145 @@
+html {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;	
+}
+
+body{
+	padding-bottom: 8px;
+	background-color:#F8F9FA
+}
+hr {
+	background-color:#DEE2E6;
+	height: 1px;
+	margin: 0px;
+	margin-bottom: 40px;
+}
+
+.small-status-label {
+	color:grey;
+	font-size:10px;
+	padding-bottom: 5px;
+	padding-left: 6px;
+}
+.small-status-label-size{
+	width: 16%;
+}
+
+.new-button {
+	border-radius: 100px !important;
+	font-size: 14px;
+	border-width: 0px;
+	box-shadow: 1px 2px 4px rgb(161, 161, 161);
+	margin-top: 6px;
+	background-color: #e9ecef;
+}
+.new-button:hover {
+	box-shadow: 1px 2px 2px rgb(161, 161, 161);
+	background-color: #dbe0e5;
+}
+
+
+.main-frame {
+	background-color:#DEE2E6;
+	border-radius: 12px;
+	box-shadow: 2px 2px 2px rgb(197, 197, 197);
+}
+
+.no-left-margin {
+	margin-left:0px !important;
+}
+
+.no-right-margin {
+	margin-right:0px !important;
+}
+
+.quarter-padding {
+	padding:25px;
+}
+
+.no-left-padding {
+	padding-left:0px
+}
+
+.no-margin {
+	margin: 0px;
+}
+
+.navbar.is-primary{
+	background-color:#344052
+}
+
+.navbar.is-primary .navbar-brand>a.navbar-item:hover {
+	background-color: #344052;
+}
+
+.navbar.is-primary .navbar-end>a.navbar-item:hover{
+	background-color: #252D3B;
+}
+
+.navbar.is-primary .navbar-end>a.navbar-item.is-active{
+	background-color: #252D3B;
+}
+.section{
+	padding-top: 1.5rem;
+}
+
+.progress-column {
+	border-radius: 8px;
+	background: white;
+	box-shadow: 2px 2px 2px rgb(197, 197, 197);
+}
+.link:hover {
+	box-shadow: 2px 3px 2px rgb(180, 180, 180);
+	background-color: #f6faff;
+}
+
+.info-column {
+	margin: 10px;
+}
+
+.pagination-link[disabled], .pagination-next[disabled], .pagination-previous[disabled] {
+	background-color: #cdcdcd;
+	border-color: #a7a7a7;
+	box-shadow: none;
+	color: #31302e;
+	opacity: .5;
+}
+
+.white-background{
+	background-color: #F8F9FA;
+}
+
+
+.progress-wrapper {
+  position: relative;
+}
+
+.progress-value {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: calc(1rem / 1.5);
+  line-height: 1rem;
+  font-weight: bold;
+}
+
+.progress.is-small+.progress-value {
+  font-size: calc(0.75rem / 1.5);
+  line-height: 0.75rem;
+}
+
+.progress.is-medium+.progress-value {
+  font-size: calc(1.25rem / 1.5);
+  line-height: 1.25rem;
+}
+
+.progress.is-large+.progress-value {
+  font-size: calc(1.5rem / 1.5);
+  line-height: 1.5rem;
+}

@@ -1,0 +1,92 @@
+{% extends 'hashcat/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block subtitle %}
+Ongoing tasks
+<a class="button is-small new-button" href="{% url 'new' %}" >
+	<span class="icon is-small">
+		<i class="fas fa-plus"></i>
+	</span>
+</a>
+{% endblock %}
+
+{% block nav-home %}<a href="#" class="navbar-item is-active">Cracking tasks</a>{% endblock %}
+
+{% block content %}
+
+	{% if crackingTasks %}
+	    {% for crackingTask in crackingTasks %}
+	    <div class="columns progress-column link" style="margin-bottom:25px;" onclick="location.href='{% url 'status' crackingTask.id %}';">
+			<table style="width: 100%;">
+				<tr>
+					<td class="has-text-left has-text-weight-bold" style="width: 11%; padding-top: 5px; padding-left:13px">{{crackingTask.name}}</td>
+					<td colspan=5 style="width: 84%; padding-top: 10px; padding-left:6px" class="progress-wrapper">
+
+						<progress class="progress is-info" style="margin:0px;" value="{{crackingTask.progressPercent}}" max="100" id="crackingProgress-{{crackingTask.id}}">{{crackingTask.progressPercent}}%</progress><p class="progress-value has-text-white" id="crackingPercentage-{{crackingTask.id}}">{{crackingTask.progressPercent}}%</p>
+					</td>
+					<td rowspan=2 class="has-text-centered has-text-weight-bold" style="width: 5%;">
+						
+					</td>
+				</tr>
+					<td class="small-status-label has-text-weight-bold" style="padding-left:13px">{{crackingTask.startDate|date:"d/m/Y H:i"}}</td>
+					<td class="small-status-label small-status-label-size">Status: <span id="crackingStatus-{{crackingTask.id}}">{{crackingTask.statusText}}</span></td>
+					<td class="small-status-label small-status-label-size">Hash type: {{crackingTask.hashTypeText}}</td>
+					<td class="small-status-label small-status-label-size">Hashes recovered: <span id="recoveredHashes-{{crackingTask.id}}">{{crackingTask.recoveredHashes}}</span></td>
+					<td class="small-status-label small-status-label-size">Total hashes: {{crackingTask.totalLoadedHashes}}</td>
+					<td class="small-status-label small-status-label-size">Estimated time: <span id="estimatedTime-{{crackingTask.id}}">{{crackingTask.estimatedTime}}s</span></td>
+				</tr>	
+			</table>
+		</div>
+	    {% endfor %}
+	    {% if crackingTasks.paginator.num_pages != 1 %}
+			<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+
+				<a class="pagination-previous white-background" {% if crackingTasks.has_previous %} href="?p={{ crackingTasks.previous_page_number }}" {% else %} disabled {% endif %}>Previous</a>
+				<a class="pagination-next white-background" {% if crackingTasks.has_next %} href="?p={{ crackingTasks.next_page_number }}" {% else %} disabled {% endif %}>Next page</a>
+
+				<ul class="pagination-list">
+					{% if crackingTasks.number != 1 %}
+					<li><a class="pagination-link white-background" href="?p=1">1</a></li>
+					<li><span class="pagination-ellipsis">&hellip;</span></li>
+					{% endif %}
+
+					{% if crackingTasks.number|add:"2" > crackingTasks.paginator.num_pages %}
+					<li><a class="pagination-link white-background" href="?p={{ crackingTasks.number|add:'-2' }}">{{ crackingTasks.number|add:"-2" }}</a></li>
+					{% endif %}
+
+					{% if crackingTasks.number > 2 %}
+					<li><a class="pagination-link white-background" href="?p={{ crackingTasks.number|add:'-1' }}">{{ crackingTasks.number|add:"-1" }}</a></li>
+					{% endif %}
+
+					<li><a class="pagination-link is-current">{{ crackingTasks.number }}</a></li>
+
+					{% if crackingTasks.number|add:"1" < crackingTasks.paginator.num_pages %}
+					<li><a class="pagination-link white-background" href="?p={{ crackingTasks.number|add:'1' }}">{{ crackingTasks.number|add:"1" }}</a></li>
+					{% endif %}
+
+					{% if crackingTasks.number <= 2 %}
+					<li><a class="pagination-link white-background" href="?p={{ crackingTasks.number|add:'2' }}">{{ crackingTasks.number|add:"2" }}</a></li>
+					{% endif %}
+
+					{% if crackingTasks.number != crackingTasks.paginator.num_pages %}
+					<li><span class="pagination-ellipsis">&hellip;</span></li>
+					<li><a class="pagination-link white-background" href="?p={{ crackingTasks.paginator.num_pages }}">{{ crackingTasks.paginator.num_pages }}</a></li>
+					{% endif %}
+				</ul>
+
+			</nav>
+		{% endif %}
+		<script type="text/javascript">
+			status(0);
+		</script>
+	{% else %}
+
+		<div class="columns progress-column has-text-centered" style="margin-bottom:25px; padding: 25px;">
+			No tasks are available.
+		</div>
+	    
+	{% endif %}
+
+{% endblock %}
+
